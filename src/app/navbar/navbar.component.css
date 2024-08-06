@@ -1,0 +1,18 @@
+:root{
+    --green:green;
+    --red:#a16929;
+}
+
+h1 {
+    color:darkorange;
+    background:var(--green);
+    padding:50px;
+}
+
+#autor {
+    margin-top: 120px;
+    margin-bottom: 120px;
+    color: green;
+    border: 1px solid red;
+    padding: 30px;
+}

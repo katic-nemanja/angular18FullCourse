@@ -1,0 +1,50 @@
+@import url('../app/navbar/navbar.component.css');
+img{
+    width: 500px;
+    height: auto;
+    /* background-size: cover; */
+    border-radius: 25%;
+}
+
+button{
+    margin:50px;
+    height: 40px;
+    border-radius: 5%;
+    width: 150px;
+    background: grey;
+}
+
+button:hover{
+    background: lightcoral;
+    color: var(--green);
+}
+
+#btn{
+    color:white;
+    background-color: brown;
+    border: 2px double goldenrod;
+}
+
+#btn:hover{
+    color:gold;
+    background: black;
+    cursor: pointer;
+}
+
+.active{
+    background-color:darkgreen;
+    border: 4px double yellow;
+}
+
+.no-active{
+    background-color: blue;
+    border: 2px solid red;
+    color:white;
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+.apple{
+    background-color: red;
+    border: 2px solid purple;
+}

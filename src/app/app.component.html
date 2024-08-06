@@ -1,1 +1,24 @@
-<h1>Angular 18 Tutorial</h1>
+<app-header></app-header>
+
+<h1>{{title}}</h1>
+
+<!-- prvi nacin za dodavanje dinamickih varijabli u property je preko string interpolation-a ili {{<ime varijable definisane u .ts fajlu>}} -->
+<img src="{{imgURL}}" />
+
+<!-- drugi nacin je property binding, gde se property stavlja u uglaste zagrade, a varijabla se ostavlja pod navodnicima  -->
+<img [src]="imgURL2" />
+
+
+<button disabled='{{ isDisabled }}'>Disable preko string interpolation-a</button>
+<button [disabled]="isDisabled">Disable preko property bindinga</button>
+
+
+
+<!-- class binding  se radi na nacin da se upise klasa i ".<ime css klase>", kada varijabla "isActive postane true, klasa se aktivira na elementu" -->
+
+<br/>
+<button [class.active]="isActive" [class.no-active]="!isActive">Klikni me picko</button>
+<br/>
+<!--style binding -  kod ispod [class.apple]="fruit=='Apple'" proverava da li varijabla fruit ima vrednost Apple i ako ima, dodeljuje elementu klasu .apple -->
+<button [class.apple]="fruit=='Apple'">Fruit ninja</button>
+<app-navbar></app-navbar>
