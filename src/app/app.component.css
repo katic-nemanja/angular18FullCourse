@@ -48,3 +48,9 @@ button:hover{
     background-color: red;
     border: 2px solid purple;
 }
+
+.dimenzije{
+    width: 200px;
+    height: 35px;
+}
+

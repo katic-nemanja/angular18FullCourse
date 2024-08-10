@@ -17,4 +17,26 @@ export class AppComponent {
   isDisabled : boolean = true;
   isActive : boolean = true;
   fruit :string ='Apple';
+  id:string = "input333";
+  izTsFajlaStil:string = 'dimenzije active';
+
+  btnClick():void{
+    this.isActive?this.isActive=false:this.isActive=true;
+  }
+
+  // da bismo u event objetku prisli svim poljima, moramo event objekat da definisemo kao "ANY" type, a ne kao OBJECT, iako to jeste
+keyPress(event:any){
+  event.keyCode==13?alert('upravo ste kliknuli Enter'):alert(`upravo ste kliknuli dugme ${event.key}`)
+  console.log(event);
 }
+
+
+keyPressCtrl(event:any){
+  alert(event.key);
+  console.log(event);
+  let inpt:any = document.querySelector('#input333');
+  inpt.value = "nova vrednost!!";
+}
+
+}
+

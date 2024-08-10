@@ -19,6 +19,35 @@
 <br/>
 <button [class.active]="isActive" [class.no-active]="!isActive">Klikni me picko</button>
 <br/>
-<!--style binding -  kod ispod [class.apple]="fruit=='Apple'" proverava da li varijabla fruit ima vrednost Apple i ako ima, dodeljuje elementu klasu .apple -->
+<!--  kod ispod [class.apple]="fruit=='Apple'" proverava da li varijabla fruit ima vrednost Apple i ako je taj uslov true, dodeljuje elementu klasu .apple -->
 <button [class.apple]="fruit=='Apple'">Fruit ninja</button>
 <app-navbar></app-navbar>
+
+
+<!-- style binding - funkcionise na isti nacin kao i class binding, samo sto je keyword style, upise se [style.<ime css stila>]=<vrednost> -->
+
+<!-- CSS pravilo background-color se u Angularu navodi kao backgroundColor, celu dokumentaciju o nazivima svojstava mozemo videti trazeci DOM STYLE PROPERTIES  -->
+<button [class.dimenzije]=true [style.backgroundColor]="isActive?'red':'green'">Crveno dugme ako je isActive true, zeleno za false</button>
+
+<!-- [class]='<ime varijable definisane u TS fajlu komponente>' - na ovaj nacin je moguce jednom elementu dodati vise klasa bez uslovne boolean varijable
+    CSS stil se u varijabli navodi kao najobicniji string koji oznacava klasu u CSS fajlu, bez tacke 
+    Primer: u CSS fajlu se klasa zove .active, a varijabla u TS fajlu "stil:string = 'active';" onda se ta varijabla "stil" prosledjuje elementu kroz [class] property    -->
+<button [class]='izTsFajlaStil'>Klasni binding</button>
+
+
+<!-- Event Binding -->
+<!-- eventi se u angularu oznacavaju u zagradi, izabere se zeljeni event i u EXPORT CLASS delu TS fajla komponente se definise funkcija koji se poziva kada se dogadjaj ispali
+    FUNKCIJU eventu dodeljujemo znakom jednakosti i pisemo je pod navodnicima
+    PRIMER: (click)="btnClick()   -->
+<br/>
+<button [class]="izTsFajlaStil" (click)="btnClick()">Klikni me za promenu stanja isActive varijable</button>
+
+<!-- prilikom ispaljivanja dogadjaja, uvek se pojavljuje $event objekat koji mozemo da prosledimo funkciji
+     Preko ovog objekta mozemo npr na (keyup) dogadjaju preko svojstva event.key saznati koje dugme je pritisnuto
+     tehnika kojom se izdvaja na koji nacin je ispaljen neki dogadjaj, zove se KeyFiltering, laksi nacin sledi
+-->
+<input type="text" (keyup)="keyPress($event)">
+
+<!-- laksi nacin je da se na keyup.<dugme> ispali dogadjaj samo kada je to dugme pritisnuto -->
+
+<input [id]="id" type="text" (keyup.Control)="keyPressCtrl($event)">
