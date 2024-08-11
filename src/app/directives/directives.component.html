@@ -1,0 +1,38 @@
+<h1>DIREKTIVE</h1>
+
+<div (click)="kliknuto()" class="kutija">
+    <!-- AKO KLIKNEM NA DIV, ISPALICE EVENT KOJI MENJA VREDNOST VARIJABLE isLoggedIn na suprotno trenutnoj vrednosti-->
+    <div><h2>IF STATEMENTS</h2></div>
+    <div class="flex-row">
+        <!-- da bi ngIf radila, potrebno je prvo u TS fajl importovati Common module direktivom "import { CommonModule } from '@angular/common';" -->
+        <!-- kako ngIf radi? tako sto ako joj se prosledi true vrednost, prikazace kontrolu, ako ima false, ugasice je -->
+        <h4 class="color-green" *ngIf='isLoggedIn'> {{userName}} </h4>
+        <!-- ngIf direktiva ne poseduje ngElse, vec pravimo varijantu za vrednost false -->
+        <h4 class="color-pink" *ngIf='!isLoggedIn'> {{userName}}  nije ulogovan</h4>
+        
+        <!-- @if je novija direktiva, ukljucena u Angular 17, funkcionise tako sto joj se prosledi varijabla koju ce da osluskuje, kada je true, 
+         prikazace kontrolu, kada je false uklonice je iz viewa -->
+        @if (isLoggedIn) {
+            <h4 class="color-green"> {{userName}} </h4>
+        }
+
+        <!-- @else statement funkcionise tako da prikazuje sadrzaj kada je vrednost varijable, koju @if osluskuje, false -->
+        @else {
+            <h4 class="color-pink"> {{userName}} nije jos uvek ulogovan </h4>
+        }
+    </div>
+
+    <div><h2>NG TEMPLATE</h2></div>
+    <div class="flex-row">
+        <!-- ng-template funkcionise tako sto se definise ng-template i u njemu ime template #<ime template>
+            zatim se ngIf direktivi nakon boolean varijable prosledjuje else<ime template> koji ce on da prosledi ukoliko je vrednost boolean varijable FALSE -->
+        <h4 *ngIf="isLoggedIn; else message" class="color-green">{{userName}} je ulogovan</h4>
+        <ng-template #message>
+            <h4 class="color-pink">{{userName}} nije ulogovan (ovo je ng-template)</h4>
+        </ng-template>
+
+    </div>
+
+
+
+</div>
