@@ -51,3 +51,31 @@
 <!-- laksi nacin je da se na keyup.<dugme> ispali dogadjaj samo kada je to dugme pritisnuto -->
 
 <input [id]="id" type="text" (keyup.Control)="keyPressCtrl($event)">
+
+<br/>
+
+<!-- template variable je varijabla preko koje mozemo da pristupimo svojstvima kontrole, definise se kao #<ime varijable>
+PRIMER: #user - definisana varijabla, dogadjaju keyup.Enter - (dogadjaj koji obradjuje kada se pritisne enter na tastaturi) se prosledjuje user varijabla
+user varijabla se u TS fajlu definise kao TYPE HtmlInputElement, preko cega mozemo pristupiti svim svojstvima kontrole
+
+*** Preko template varijable je moguce menjati sva svojstva bez "hvatanja" kontrole iz DOM-a klasicnim putem querySelector(), 
+    nego <ime template varijable>.value = 'nova vrednost' ce postaviti novu vrednost u toj kontroli -->
+<input type="text"  id="userInput" class="klasaNekaTamo" (keyup.Enter)="keyPressEnter(user)" #user >
+
+
+<br/>
+
+<!-- two directional data binding - dvosmerno bindovanje podataka tezi nacin
+     iz TS fajla prvo uvezemo varijablu userName preko property bindinga, preko template stringa pristupimo kontroli iz koje preuzmemo value (u TS fajlu)
+     i na kraju editujemo varijablu userName novom vrednoscu
+-->
+
+<input type="text" class="mt-15 dimenzije" #userNameControl (keyup.Enter)="changeUserName(userNameControl)" [value]="userName" id="twoDirectionDataBinding">
+<br/>
+<!-- two directional data binding - dvosmerno bindovanje podataka - laksi nacin 
+     [(ngModel)]="userName" - ngModel da bi bio koriscen, u TS fajlu moramo da importujemo "import { FormsModule } from '@angular/forms'",
+     zatim joj se prosledjuje varijabla sa kojom zelimo da ostvarimo dvosmerni update i ngModel to radi sam za nas
+-->
+<input class="mt-15 dimenzije" type="text" [(ngModel)]="userName" >
+
+<h4>{{userName}}</h4>

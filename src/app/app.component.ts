@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppNavbar } from "./navbar/navbar.component";
 import { HeaderComponent } from "./header/header.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AppNavbar, HeaderComponent],
+  imports: [RouterOutlet, AppNavbar, HeaderComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,6 +20,8 @@ export class AppComponent {
   fruit :string ='Apple';
   id:string = "input333";
   izTsFajlaStil:string = 'dimenzije active';
+
+  userName:string = 'Nemanja Katic';
 
   btnClick():void{
     this.isActive?this.isActive=false:this.isActive=true;
@@ -36,6 +39,20 @@ keyPressCtrl(event:any){
   console.log(event);
   let inpt:any = document.querySelector('#input333');
   inpt.value = "nova vrednost!!";
+}
+
+keyPressEnter(user:HTMLInputElement){
+  console.log(user.id + user.className);
+  user.value = "Promena vrednosti iz TS fajla";
+}
+
+
+changeUserName(kontrola:HTMLInputElement){
+  console.log(`Pre promene > ${this.userName}`);
+  
+  this.userName = kontrola.value;
+  console.log(`Posle promene > ${this.userName}`);
+  
 }
 
 }

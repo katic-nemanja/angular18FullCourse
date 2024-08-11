@@ -49,8 +49,12 @@ button:hover{
     border: 2px solid purple;
 }
 
-.dimenzije{
+.dimenzije, .klasaNekaTamo{
     width: 200px;
     height: 35px;
 }
 
+
+.mt-15{
+    margin-top: 15px;
+}
