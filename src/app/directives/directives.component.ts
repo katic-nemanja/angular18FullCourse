@@ -9,10 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './directives.component.css'
 })
 export class DirectivesComponent {
-  isLoggedIn:boolean = true;
-  userName:string = "Nemanja Katic";
-
-  kliknuto(){
-    this.isLoggedIn=!this.isLoggedIn;
+  isLoggedIn: boolean = true;
+  userName: string = "Nemanja Katic";
+  isAdmin: boolean = true;
+  isMember: boolean = true;
+  isGuest: boolean = true;
+  kliknuto() {
+    this.isLoggedIn = !this.isLoggedIn;
   }
 }

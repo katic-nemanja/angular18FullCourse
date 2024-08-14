@@ -33,6 +33,14 @@
 
     </div>
 
+    <div><h2>Multiple conditions</h2></div>
+    <div class="flex-row">
+        <h4 *ngIf="isAdmin">Ulogovani ste kao Administrator</h4>
+        <h4 *ngIf="isMember">Ulogovani ste kao Clan</h4>
+        <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+
+    </div>
+
 
 
 </div>
