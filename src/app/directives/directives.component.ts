@@ -11,8 +11,8 @@ import { Component } from '@angular/core';
 export class DirectivesComponent {
   isLoggedIn: boolean = true;
   userName: string = "Nemanja Katic";
-  isAdmin: boolean = true;
-  isMember: boolean = true;
+  isAdmin: boolean = false;
+  isMember: boolean = false;
   isGuest: boolean = true;
   kliknuto() {
     this.isLoggedIn = !this.isLoggedIn;

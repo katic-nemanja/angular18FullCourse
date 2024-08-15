@@ -2,27 +2,31 @@
 
 <div (click)="kliknuto()" class="kutija">
     <!-- AKO KLIKNEM NA DIV, ISPALICE EVENT KOJI MENJA VREDNOST VARIJABLE isLoggedIn na suprotno trenutnoj vrednosti-->
-    <div><h2>IF STATEMENTS</h2></div>
+    <div>
+        <h1>IF STATEMENTS</h1>
+    </div>
     <div class="flex-row">
         <!-- da bi ngIf radila, potrebno je prvo u TS fajl importovati Common module direktivom "import { CommonModule } from '@angular/common';" -->
         <!-- kako ngIf radi? tako sto ako joj se prosledi true vrednost, prikazace kontrolu, ako ima false, ugasice je -->
         <h4 class="color-green" *ngIf='isLoggedIn'> {{userName}} </h4>
         <!-- ngIf direktiva ne poseduje ngElse, vec pravimo varijantu za vrednost false -->
-        <h4 class="color-pink" *ngIf='!isLoggedIn'> {{userName}}  nije ulogovan</h4>
-        
+        <h4 class="color-pink" *ngIf='!isLoggedIn'> {{userName}} nije ulogovan</h4>
+
         <!-- @if je novija direktiva, ukljucena u Angular 17, funkcionise tako sto joj se prosledi varijabla koju ce da osluskuje, kada je true, 
          prikazace kontrolu, kada je false uklonice je iz viewa -->
         @if (isLoggedIn) {
-            <h4 class="color-green"> {{userName}} </h4>
+        <h4 class="color-green"> {{userName}} </h4>
         }
 
         <!-- @else statement funkcionise tako da prikazuje sadrzaj kada je vrednost varijable, koju @if osluskuje, false -->
         @else {
-            <h4 class="color-pink"> {{userName}} nije jos uvek ulogovan </h4>
+        <h4 class="color-pink"> {{userName}} nije jos uvek ulogovan </h4>
         }
     </div>
 
-    <div><h2>NG TEMPLATE</h2></div>
+    <div>
+        <h1>NG TEMPLATE</h1>
+    </div>
     <div class="flex-row">
         <!-- ng-template funkcionise tako sto se definise ng-template i u njemu ime template #<ime template>
             zatim se ngIf direktivi nakon boolean varijable prosledjuje else<ime template> koji ce on da prosledi ukoliko je vrednost boolean varijable FALSE -->
@@ -33,12 +37,49 @@
 
     </div>
 
-    <div><h2>Multiple conditions</h2></div>
-    <div class="flex-row">
-        <h4 *ngIf="isAdmin">Ulogovani ste kao Administrator</h4>
-        <h4 *ngIf="isMember">Ulogovani ste kao Clan</h4>
-        <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+    <div>
+        <h1>Multiple conditions ngIf pristup</h1>
+    </div>
+    <div class="flex-column">
+        <h2>Obican pristup putem *ngIf-a </h2>
+        <div class="flex-row">
+            <h4 *ngIf="isAdmin">Ulogovani ste kao Administrator</h4>
+            <h4 *ngIf="isMember">Ulogovani ste kao Clan</h4>
+            <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+        </div>
 
+    </div>
+    <div class="flex-column">
+        <!-- ngIf - Else pristup je komplikovan jer kada imamo vise od jednog izbora,
+         svaki sledeci "else if" mora da bude ugnezden unutar <ng-template>
+            Sledi primer:  -->
+        <h2>ngIf - Else pristup</h2>
+        <div class="flex-row">
+            <h4 *ngIf="isAdmin; else memberMsg">Ulogovani ste kao Administrator</h4>
+
+            <ng-template #memberMsg>
+                <h4 *ngIf="isMember; else guestMsg">Ulogovani ste kao Clan</h4>
+            </ng-template>
+            <ng-template #guestMsg>
+                <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+            </ng-template>
+        </div>
+
+    </div>
+
+
+    <!-- Jasno se vidi da je @if/@else if sintaksa daleko laksa od ngIf sintakse -->
+    <h1>Multiple conditions &#64;if/else pristup</h1>
+    <div class="flex-row">
+        @if(isAdmin){
+        <h4>Ulogovani ste kao administrator</h4>
+        }
+        @else if(isMember){
+        <h4>Ulogovani ste kao clan</h4>
+        }
+        @else if (isGuest) {
+        <h4>Ulogovani ste kao gost!!!</h4>
+        }
     </div>
 
 

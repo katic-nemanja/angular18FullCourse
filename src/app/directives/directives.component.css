@@ -27,6 +27,13 @@ h2:hover{
 }
 
 
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
 .color-green{
     color: green;
 }
