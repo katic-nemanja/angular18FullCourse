@@ -5,7 +5,7 @@
     <div>
         <h1>IF STATEMENTS</h1>
     </div>
-    <div class="flex-row">
+    <div class="flex-row flex-center outside-border">
         <!-- da bi ngIf radila, potrebno je prvo u TS fajl importovati Common module direktivom "import { CommonModule } from '@angular/common';" -->
         <!-- kako ngIf radi? tako sto ako joj se prosledi true vrednost, prikazace kontrolu, ako ima false, ugasice je -->
         <h4 class="color-green" *ngIf='isLoggedIn'> {{userName}} </h4>
@@ -24,64 +24,162 @@
         }
     </div>
 
-    <div>
-        <h1>NG TEMPLATE</h1>
-    </div>
+    
+</div>
+
+<div>
+    <h1>NG TEMPLATE</h1>
+</div>
+<div class="flex-row flex-center outside-border">
+    <!-- ng-template funkcionise tako sto se definise ng-template i u njemu ime template #<ime template>
+        zatim se ngIf direktivi nakon boolean varijable prosledjuje else<ime template> koji ce on da prosledi ukoliko je vrednost boolean varijable FALSE -->
+    <h4 *ngIf="isLoggedIn; else message" class="color-green">{{userName}} je ulogovan</h4>
+    <ng-template #message>
+        <h4 class="color-pink">{{userName}} nije ulogovan (ovo je ng-template)</h4>
+    </ng-template>
+
+</div>
+
+<div>
+    <h1>Multiple conditions ngIf pristup</h1>
+</div>
+<div class="flex-column flex-center outside-border">
+    <h2>Obican pristup putem *ngIf-a </h2>
     <div class="flex-row">
-        <!-- ng-template funkcionise tako sto se definise ng-template i u njemu ime template #<ime template>
-            zatim se ngIf direktivi nakon boolean varijable prosledjuje else<ime template> koji ce on da prosledi ukoliko je vrednost boolean varijable FALSE -->
-        <h4 *ngIf="isLoggedIn; else message" class="color-green">{{userName}} je ulogovan</h4>
-        <ng-template #message>
-            <h4 class="color-pink">{{userName}} nije ulogovan (ovo je ng-template)</h4>
+        <h4 *ngIf="isAdmin">Ulogovani ste kao Administrator</h4>
+        <h4 *ngIf="isMember">Ulogovani ste kao Clan</h4>
+        <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+    </div>
+
+</div>
+<div class="flex-column flex-center outside-border">
+    <!-- ngIf - Else pristup je komplikovan jer kada imamo vise od jednog izbora,
+     svaki sledeci "else if" mora da bude ugnezden unutar <ng-template>
+        Sledi primer:  -->
+    <h2>ngIf - Else pristup</h2>
+    <div class="flex-row">
+        <h4 *ngIf="isAdmin; else memberMsg">Ulogovani ste kao Administrator</h4>
+
+        <ng-template #memberMsg>
+            <h4 *ngIf="isMember; else guestMsg">Ulogovani ste kao Clan</h4>
+        </ng-template>
+        <ng-template #guestMsg>
+            <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+        </ng-template>
+    </div>
+
+</div>
+
+
+<div class="flex-column flex-center outside-border">
+    <!-- ngIf - Else pristup je komplikovan jer kada imamo vise od jednog izbora,
+     svaki sledeci "else if" mora da bude ugnezden unutar <ng-template>
+        Sledi primer:  -->
+    <h2>If uslovi sa brojevnom promenljivom</h2>
+    <div class="flex-row">
+        @if(logInCounter<3)
+            { <button (click)="attemptLogIn()">Log in</button>}
+        @else {
+            <h4>Premasili ste dozvoljeni broj pokusaja</h4>
+        }
+    </div>
+
+</div>
+
+<div class="flex-column flex-center outside-border">
+    <!-- ngIf - Else pristup je komplikovan jer kada imamo vise od jednog izbora,
+     svaki sledeci "else if" mora da bude ugnezden unutar <ng-template>
+        Sledi primer:  -->
+    <h2>If uslovi sa tekstualnom promenljivom</h2>
+
+    <!-- primer sa ngIf/else pristupom -->
+    <div class="flex-row flex-center outside-border">
+        <h4 *ngIf="userRole=='Admin'; else userRoleMember">Welcome admin</h4>
+        <ng-template #userRoleMember> 
+            <h4 *ngIf="userRole=='Member'; else userRoleRest">Welcome member</h4>
+        </ng-template>
+        <ng-template #userRoleRest>
+            <h4>Welcome {{userRole}}</h4>
+        </ng-template>
+    </div>
+
+    <div class="flex-row flex-center outside-border">
+        @if(userRole=='Admin'){
+            <h4>Welcome admin</h4>
+        }
+        @else if(userRole=='Member'){
+            <h4>Welcome Member</h4>
+        }
+        @else {
+            <h4>Welcome {{userRole}} iz &#64;if statement</h4>
+        }
+    </div>
+
+</div>
+
+
+<!-- Jasno se vidi da je @if/@else if sintaksa daleko laksa od ngIf sintakse -->
+<h1>Multiple conditions &#64;if/else pristup</h1>
+<div class="flex-row flex-center outside-border">
+    @if(isAdmin){
+    <h4>Ulogovani ste kao administrator</h4>
+    }
+    @else if(isMember){
+    <h4>Ulogovani ste kao clan</h4>
+    }
+    @else if (isGuest) {
+    <h4>Ulogovani ste kao gost!!!</h4>
+    }
+</div>
+
+<div class="flex-column flex-center outside-border">
+    <h1>Ng Template outlet</h1>
+    <div class="flex-column flex-center">
+
+        <!-- kada definisemo ng-template unutar neke komponente, mozemo je svuda koristiti
+         samo je potrebno da u kontroli navedemo [[ngTemplateOutlet]="<ime ng-template"] 
+         i ta ng-template ce biti appendovana na kraj tog html taga 
+         da bi ngTemplateOutlet funkcionisala, moramo importovati angular/common u .ts component fajl
+         -->
+        <ng-template #callToAction>
+            <button>Uloguj se!!!</button>
         </ng-template>
 
-    </div>
-
-    <div>
-        <h1>Multiple conditions ngIf pristup</h1>
-    </div>
-    <div class="flex-column">
-        <h2>Obican pristup putem *ngIf-a </h2>
-        <div class="flex-row">
-            <h4 *ngIf="isAdmin">Ulogovani ste kao Administrator</h4>
-            <h4 *ngIf="isMember">Ulogovani ste kao Clan</h4>
-            <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
+        <div class="flex-column flex-center" [ngTemplateOutlet]="callToAction">
+            <h3>Prvi div</h3>
         </div>
 
-    </div>
-    <div class="flex-column">
-        <!-- ngIf - Else pristup je komplikovan jer kada imamo vise od jednog izbora,
-         svaki sledeci "else if" mora da bude ugnezden unutar <ng-template>
-            Sledi primer:  -->
-        <h2>ngIf - Else pristup</h2>
-        <div class="flex-row">
-            <h4 *ngIf="isAdmin; else memberMsg">Ulogovani ste kao Administrator</h4>
-
-            <ng-template #memberMsg>
-                <h4 *ngIf="isMember; else guestMsg">Ulogovani ste kao Clan</h4>
-            </ng-template>
-            <ng-template #guestMsg>
-                <h4 *ngIf="isGuest">Ulogovani ste kao Gost</h4>
-            </ng-template>
+        <div class="flex-column flex-center" [ngTemplateOutlet]="callToAction">
+            <h3>Drugi div</h3>
         </div>
 
+        <div class="flex-column flex-center" [ngTemplateOutlet]="callToAction">
+            <h3>Treci div</h3>
+        </div>
+    </div>
+</div>
+
+<div class="flex-column flex-center outside-border">
+    <h1>FOR DIREKTIVA</h1>
+    <div class="flex-column flex-center outside-border">
+        <h2>Generisano iz ngFor direktive</h2>
+        <h3>{{users}}</h3>
+        <!-- ngFor funkcionise tako sto se unutar html taga definise ngFor u kome se definise varijabla
+         koja ce proci kroz Array definisanom varijablom, koju mozemo da pozovemo unutar html taga
+         putem string interpolation-a
+         ngFor da bi funkcionisao, mora biti importovan @angular/common u .ts fajl komponente -->
+        <h3 *ngFor="let korisnik of users">{{korisnik}}</h3>
     </div>
 
+    <div class="flex-column flex-center outside-border">
+        <h2>Generisano iz &#64;For direktive</h2>
 
-    <!-- Jasno se vidi da je @if/@else if sintaksa daleko laksa od ngIf sintakse -->
-    <h1>Multiple conditions &#64;if/else pristup</h1>
-    <div class="flex-row">
-        @if(isAdmin){
-        <h4>Ulogovani ste kao administrator</h4>
-        }
-        @else if(isMember){
-        <h4>Ulogovani ste kao clan</h4>
-        }
-        @else if (isGuest) {
-        <h4>Ulogovani ste kao gost!!!</h4>
+        <!-- @for funkcionise tako sto joj se prosledi Array, definise se varijabla koja ce proci kroz
+         taj Array, cak moze i da prati index svakog elementa preko "track $index" 
+         index mozemo pozvati preko string interpolationa kao {{$index}}
+         -->
+        @for (korisnik of users; track $index) {
+            <h3>{{korisnik}} koji ima index:{{$index}}</h3>
         }
     </div>
-
-
-
 </div>
