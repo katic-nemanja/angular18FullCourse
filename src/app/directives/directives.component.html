@@ -24,7 +24,7 @@
         }
     </div>
 
-    
+
 </div>
 
 <div>
@@ -77,11 +77,10 @@
         Sledi primer:  -->
     <h2>If uslovi sa brojevnom promenljivom</h2>
     <div class="flex-row">
-        @if(logInCounter<3)
-            { <button (click)="attemptLogIn()">Log in</button>}
-        @else {
+        @if(logInCounter<3) { <button (click)="attemptLogIn()">Log in</button>}
+            @else {
             <h4>Premasili ste dozvoljeni broj pokusaja</h4>
-        }
+            }
     </div>
 
 </div>
@@ -95,7 +94,7 @@
     <!-- primer sa ngIf/else pristupom -->
     <div class="flex-row flex-center outside-border">
         <h4 *ngIf="userRole=='Admin'; else userRoleMember">Welcome admin</h4>
-        <ng-template #userRoleMember> 
+        <ng-template #userRoleMember>
             <h4 *ngIf="userRole=='Member'; else userRoleRest">Welcome member</h4>
         </ng-template>
         <ng-template #userRoleRest>
@@ -105,13 +104,13 @@
 
     <div class="flex-row flex-center outside-border">
         @if(userRole=='Admin'){
-            <h4>Welcome admin</h4>
+        <h4>Welcome admin</h4>
         }
         @else if(userRole=='Member'){
-            <h4>Welcome Member</h4>
+        <h4>Welcome Member</h4>
         }
         @else {
-            <h4>Welcome {{userRole}} iz &#64;if statement</h4>
+        <h4>Welcome {{userRole}} iz &#64;if statement</h4>
         }
     </div>
 
@@ -179,7 +178,48 @@
          index mozemo pozvati preko string interpolationa kao {{$index}}
          -->
         @for (korisnik of users; track $index) {
-            <h3>{{korisnik}} koji ima index:{{$index}}</h3>
+        <h3>{{korisnik}} koji ima index:{{$index}}</h3>
         }
+    </div>
+
+    <div class="flex-column flex-left outside-border">
+        <h1>Fetch object array using ngFor</h1>
+
+        <!-- FETCHING Array of objects funkcionise isto kao i obican array, samo sa tom razlikom
+         sto u Array-u objekata moramo da se pozovemo na ime polja u objektu DOT notacijom -->
+        <ul *ngFor="let korisnikObject of usersObject">
+            <li>{{korisnikObject.id}}</li>
+            <li>{{korisnikObject.name}}</li>
+            <li>{{korisnikObject.email}}</li>
+            
+            <!-- brisanje korisnika trazenjem indexa objekta u Arrayu -->
+            <button (click)="obrisiKorisnika(korisnikObject)">Obrisi korisnika</button>
+        </ul>
+
+    </div>
+
+    <div class="flex-column flex-left outside-border">
+        <h1>Fetch object array using &#64;for direktive</h1>
+        <!-- FETCHING Array of objects funkcionise isto kao i obican array, samo sa tom razlikom
+         sto u Array-u objekata moramo da se pozovemo na ime polja u objektu DOT notacijom -->
+
+        @for (korisnikObject of usersObject; track $index) {
+        <ul>
+            <li>Index: {{$index}}</li>
+            <li>Id: {{korisnikObject.id}}</li>
+            <li>Ime: {{korisnikObject.name}}</li>
+            <li>Email: {{korisnikObject.email}}</li>
+            <!-- ovde direktno prosledjujemo index elementa funkciji -->
+            <button (click)="obrisiKorisnikaIndexom($index)">Obrisi korisnika</button>
+        </ul>
+
+        }
+
+    </div>
+
+    <div class="flex-column flex-left outside-border">
+        <h1>Change detection in Angular</h1>
+        <!-- svaku promenu u stanju objekata, Angular update-uje DOM ne bi li prikazao te promene -->
+         <button (click)="dodajKorisnika()">Dodaj novog korisnika u varijablu usersObject</button>
     </div>
 </div>
