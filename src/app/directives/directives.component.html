@@ -182,44 +182,111 @@
         }
     </div>
 
-    <div class="flex-column flex-left outside-border">
-        <h1>Fetch object array using ngFor</h1>
-
-        <!-- FETCHING Array of objects funkcionise isto kao i obican array, samo sa tom razlikom
-         sto u Array-u objekata moramo da se pozovemo na ime polja u objektu DOT notacijom -->
-        <ul *ngFor="let korisnikObject of usersObject">
-            <li>{{korisnikObject.id}}</li>
-            <li>{{korisnikObject.name}}</li>
-            <li>{{korisnikObject.email}}</li>
-            
-            <!-- brisanje korisnika trazenjem indexa objekta u Arrayu -->
-            <button (click)="obrisiKorisnika(korisnikObject)">Obrisi korisnika</button>
-        </ul>
-
+    <div *ngIf="usersObject.length==0;else fetchedUserObjects">
+        <h1>Nema usera za prikaz</h1>
     </div>
 
-    <div class="flex-column flex-left outside-border">
+    <ng-template #fetchedUserObjects>
+        <div class="flex-column flex-center outside-border">
+            <h1>Fetch object array using ngFor</h1>
+
+            <!-- FETCHING Array of objects funkcionise isto kao i obican array, samo sa tom razlikom
+             sto u Array-u objekata moramo da se pozovemo na ime polja u objektu DOT notacijom -->
+            <div class="flex-left">
+                <ul *ngFor="let korisnikObject of usersObject">
+                    <li>ID: {{korisnikObject.id}}</li>
+                    <li>Ime: {{korisnikObject.name}}</li>
+                    <li>Mail: {{korisnikObject.email}}</li>
+
+                    <!-- brisanje korisnika trazenjem indexa objekta u Arrayu -->
+                    <button (click)="obrisiKorisnika(korisnikObject)">Obrisi korisnika</button>
+                </ul>
+            </div>
+
+
+        </div>
+    </ng-template>
+
+
+    @if(usersObject.length==0){
+    <h1>Nema korisnika za prikaz</h1>
+    }
+    @else {
+    <div class="flex-column flex-center outside-border">
         <h1>Fetch object array using &#64;for direktive</h1>
         <!-- FETCHING Array of objects funkcionise isto kao i obican array, samo sa tom razlikom
-         sto u Array-u objekata moramo da se pozovemo na ime polja u objektu DOT notacijom -->
+                 sto u Array-u objekata moramo da se pozovemo na ime polja u objektu DOT notacijom -->
 
-        @for (korisnikObject of usersObject; track $index) {
-        <ul>
-            <li>Index: {{$index}}</li>
-            <li>Id: {{korisnikObject.id}}</li>
-            <li>Ime: {{korisnikObject.name}}</li>
-            <li>Email: {{korisnikObject.email}}</li>
-            <!-- ovde direktno prosledjujemo index elementa funkciji -->
-            <button (click)="obrisiKorisnikaIndexom($index)">Obrisi korisnika</button>
-        </ul>
 
-        }
+        <div class="flex-left">
+            <!-- $count,$first,$last,$even,$odd su predefinisane varijable koje unutar @for petlje
+             mozemo inicijalizovati, ne bismo li kroz uslovno grananje svaki od izbora stilizovali
+             ili uredili na poseban nacin -->
+            @for (korisnikObject of usersObject; track $index; let i=$index; let count = $count;
+            let last = $last; let first = $first; let even = $even; let odd = $odd) {
+            <ul class="flex-left">
 
+                <li>Id: {{korisnikObject.id}}</li>
+                <li>Ime: {{korisnikObject.name}}</li>
+                <li>Email: {{korisnikObject.email}}</li>
+                <li>Prvi: {{first}},
+                <li>poslednji: {{last}}</li>
+                <!-- even i odd posmatraju vrednost indexa u odluci da li je neki element paran ili neparan
+                 sto znaci da je prvi element u Arrayu paran jer ima index 0, drugi neparan jer ima index 1 itd -->
+                 <li>index: {{i}}</li>
+                <li>neparan: {{odd}}</li>
+                <li>paran: {{even}}</li>
+                <!-- ovde direktno prosledjujemo index elementa funkciji -->
+                
+                <p>Korisnik {{i+1}}/{{count}}</p>
+                <button (click)="obrisiKorisnikaIndexom($index)">Obrisi korisnika</button>
+
+            </ul>
+
+            }
+
+            <!-- @empty direktiva se nadovezuje na @for direktivu i reaguje na dogadjaje kada @for direktiva
+                         naidje na prazan Array -->
+            @empty {
+            <h1>Nema usera za prikaz - generisano iz &#64;empty direktive </h1>
+            }
+        </div>
     </div>
 
-    <div class="flex-column flex-left outside-border">
+    }
+
+
+    <div class="flex-column flex-center outside-border">
         <h1>Change detection in Angular</h1>
         <!-- svaku promenu u stanju objekata, Angular update-uje DOM ne bi li prikazao te promene -->
-         <button (click)="dodajKorisnika()">Dodaj novog korisnika u varijablu usersObject</button>
+        <button (click)="dodajKorisnika()">Dodaj novog korisnika u varijablu usersObject</button>
     </div>
+</div>
+
+<h1>Switch statements</h1>
+
+<div class="flex-center flex-column">
+    <h1>ngSwitch statement</h1>
+    <div [ngSwitch]="userRole">
+
+        <p *ngSwitchCase="'Admin'">Welcome {{userRole}}</p>
+        <p *ngSwitchCase="'Member'">Welcome {{userRole}}</p>
+        <p *ngSwitchDefault>Welcome nepoznati covece</p>
+    </div>
+
+
+    <h1>&#64;Switch statement</h1>
+
+    @switch (userRole) {
+        @case ('Admin') {
+            <p>Dobrodosao Administratore nas, Administratore nas, Administratore nas</p>
+        }
+        @case ('Member') {
+            <p>Dobrosao Druze Clane partije</p>
+        }
+        @default {
+            <button (click)="logIn()">Molimo, ulogujte se</button>
+            <input type="text" id="inptText">
+        }
+    }
 </div>

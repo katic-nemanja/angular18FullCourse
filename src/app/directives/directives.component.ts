@@ -17,7 +17,7 @@ export class DirectivesComponent {
 
   logInCounter: number = 0;
 
-  userRole: string = 'Gost u kuci';
+  userRole: string = 'unknown1';
 
   users: Array<string> = ['Nemanja', 'Jovan', 'Tamara', 'Natasa'];
 
@@ -58,5 +58,10 @@ export class DirectivesComponent {
 
   obrisiKorisnikaIndexom(index:number){
     this.usersObject.splice(index,1);
+  }
+
+  logIn(){
+    let vrednost:any = document.querySelector("#inptText");
+    this.userRole = vrednost.value;
   }
 }
