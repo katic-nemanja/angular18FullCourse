@@ -64,3 +64,15 @@ button{
     background: rgb(235, 98, 18);
     border-radius: 10%;
 }
+
+.logIn{
+    color:green;
+    background: grey;
+    text-transform: uppercase;
+}
+
+.logOut{
+    color:red;
+    background: aqua;
+    text-transform: lowercase;
+}

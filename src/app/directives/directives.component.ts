@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './directives.component.css'
 })
 export class DirectivesComponent {
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = false;
   userName: string = "Nemanja Katic";
   isAdmin: boolean = false;
   isMember: boolean = false;

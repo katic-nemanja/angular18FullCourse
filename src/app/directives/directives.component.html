@@ -233,11 +233,11 @@
                 <li>poslednji: {{last}}</li>
                 <!-- even i odd posmatraju vrednost indexa u odluci da li je neki element paran ili neparan
                  sto znaci da je prvi element u Arrayu paran jer ima index 0, drugi neparan jer ima index 1 itd -->
-                 <li>index: {{i}}</li>
+                <li>index: {{i}}</li>
                 <li>neparan: {{odd}}</li>
                 <li>paran: {{even}}</li>
                 <!-- ovde direktno prosledjujemo index elementa funkciji -->
-                
+
                 <p>Korisnik {{i+1}}/{{count}}</p>
                 <button (click)="obrisiKorisnikaIndexom($index)">Obrisi korisnika</button>
 
@@ -278,15 +278,55 @@
     <h1>&#64;Switch statement</h1>
 
     @switch (userRole) {
-        @case ('Admin') {
-            <p>Dobrodosao Administratore nas, Administratore nas, Administratore nas</p>
-        }
-        @case ('Member') {
-            <p>Dobrosao Druze Clane partije</p>
-        }
-        @default {
-            <button (click)="logIn()">Molimo, ulogujte se</button>
-            <input type="text" id="inptText">
-        }
+    @case ('Admin') {
+    <p>Dobrodosao Administratore nas, Administratore nas, Administratore nas</p>
     }
+    @case ('Member') {
+    <p>Dobrosao Druze Clane partije</p>
+    }
+    @default {
+    <button (click)="logIn()">Molimo, ulogujte se</button>
+    <input type="text" id="inptText">
+    }
+    }
+
+
+</div>
+
+<h1>Style binding</h1>
+<div class="flex-center flex-column">
+    <!-- style binding funkcionise tako sto sto se napise [style.<ime css pravila>]=<uslov>?<vrednost ako je true>:<vrednost ako je false>
+        losa strana style bindinga je u tome sto za jedan isti element za vise razlicitih pravila moramo da ponovimo
+        direktivu [style.<ime novog pravila>...] dok u ngStyle mozemo da unutar jedne direktive definisemo
+        vise razlicitih pravila koja treba da budu primenjena na elementu -->
+    <h1 [style.color]="isLoggedIn?'blue':'red'" [style.textTransform]="isLoggedIn?'uppercase':'lowercase'"
+        [style.background]="isLoggedIn?'grey':'aqua'">
+        Welcome admin - Style binding
+    </h1>
+
+    <!-- ngStyle funkcionise tako sto se napise [ngStyle="<ime css direktive>:<uslov>?<vrednost za true>:<vrednost za false>, <ime novog css pravila>..."] 
+        dobra strana ovog pristupa je u tome sto se moze definisati neograniceno css pravila unutar jednog elementa-->
+    <h1 [ngStyle]="{'color':isLoggedIn?'blue':'red',
+                    'background':isLoggedIn?'grey':'aqua',
+                    'textTransform':isLoggedIn?'uppercase':'lowercase'
+                    }">
+        Welcome administrator - ngStyle binding
+    </h1>
+
+    <!-- class binding funkcionise tako sto se napise [class.<ime klase definisane u css fajlu>=<uslov>] 
+        problem sa ovim nacinom dodavanja klasa elementu je u tome sto se mora ponoviti direktiva i za ostale
+        moguce ishode uslova
+        -->
+    <h1 [class.logIn]="isLoggedIn" [class.logOut]="!isLoggedIn">
+        Welcome administrator - Class binding
+    </h1>
+
+    <!-- ngClass binding funkcionise tako sto se napise [ngClass="{<ime klase definisane u css fajlul>:<uslov>
+        , <ime druge klase>:<drugi uslov>}"]
+        ovaj pristup je odlican jer se svi moguci ishodi pokrivaju unutar jedne direktive -->
+    <h1
+    [ngClass]="{'logIn':isLoggedIn, 'logOut':!isLoggedIn}">
+    Welcome administrator - ngClassBinding
+    </h1>
+
 </div>
