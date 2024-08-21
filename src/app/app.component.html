@@ -1,4 +1,12 @@
 <app-header></app-header>
+<app-navbar></app-navbar>
+<h2>{{appPostListTitle}} (App Component)</h2>
+<!-- [postListTitle]="appPostListTitle" [postListIsLogin]="appIsLogin" - ovo je nacin da se iz PARENT component
+ posalje varijabla u CHILD component
+ u uglastim zagradama se navodi ime varijable definisane u CHILD componentu, a iza znaka "=", pod navodnicima,
+ se navodi ime varijable ili vrednost koju zelimo da prosledimo u CHILD component
+ OVDE SMO VIDELI PRIMER PROSLEDJIVANJA DVE VARIJABLE IZ PARENTA U CHILD -->
+<app-posts-list [postListTitle]="appPostListTitle" [postListIsLogin]="appIsLogin"></app-posts-list>
 
 <!-- OVDE SAM UBACIO DIREKTIVE DA BI BILE VIDLJIVIJE -->
 <app-directives></app-directives>
@@ -24,7 +32,7 @@
 <br/>
 <!--  kod ispod [class.apple]="fruit=='Apple'" proverava da li varijabla fruit ima vrednost Apple i ako je taj uslov true, dodeljuje elementu klasu .apple -->
 <button [class.apple]="fruit=='Apple'">Fruit ninja</button>
-<app-navbar></app-navbar>
+
 
 
 <!-- style binding - funkcionise na isti nacin kao i class binding, samo sto je keyword style, upise se [style.<ime css pravila>]=<vrednost> -->
