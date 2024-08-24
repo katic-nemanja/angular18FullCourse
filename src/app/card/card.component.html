@@ -1,1 +1,23 @@
-<p>card works!</p>
+<h1>Card component - NG-CONTENT</h1>
+<!-- preko ng-contenta sav HTML naveden unutar selektora komponente iz Parent komponente, bice prikazan kao deo CHILD komponente -->
+<ng-content></ng-content>
+
+
+<!-- unutar ng-content mozemo da dodamo selektore "select="[header]" sto cini da unutar PARENT componenta 
+ mozemo da upisemo naziv selektora npr  <span header>Random header</span> i taj tekst ce pasti tacno u ng-content sa header selektorom -->
+<header>
+    <h2>
+        <ng-content select="[header]"></ng-content>
+    </h2>
+</header>
+<div class="body">
+    <p>
+        <ng-content select="[body]"></ng-content>
+    </p>
+</div>
+<footer>
+    <h3>
+        <ng-content select="[footer]"></ng-content>
+    </h3>
+</footer>
+

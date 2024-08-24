@@ -1,5 +1,4 @@
 <app-header></app-header>
-<app-navbar></app-navbar>
 
 <!-- ####POST LIST POCETAK -->
 <h2>{{appPostListTitle}} (App Component)</h2>
@@ -8,8 +7,9 @@
  u uglastim zagradama se navodi ime varijable definisane u CHILD componentu, a iza znaka "=", pod navodnicima,
  se navodi ime varijable ili vrednost koju zelimo da prosledimo u CHILD component
  OVDE SMO VIDELI PRIMER PROSLEDJIVANJA DVE VARIJABLE IZ PARENTA U CHILD -->
- <!-- (porukaEvent)="primiPoruku($event)" ovo je event definisan u child komponenti preko koje primamo podatke unutar ove PARENT komponente -->
-<app-posts-list (porukaEvent)="primiPoruku($event)" [postListTitle]="appPostListTitle" [postListIsLogin]="appIsLogin"></app-posts-list>
+<!-- (porukaEvent)="primiPoruku($event)" ovo je event definisan u child komponenti preko koje primamo podatke unutar ove PARENT komponente -->
+<app-posts-list (porukaEvent)="primiPoruku($event)" [postListTitle]="appPostListTitle"
+    [postListIsLogin]="appIsLogin"></app-posts-list>
 <!-- ovo je primer preuzimanja podataka iz CHILD komponente preko @ViewChild -->
 <p>{{preuzetaPorukaIzChilda}} - &#64;ViewChild</p>
 <!-- ovo je primer preuzimanja podataka iz CHILD komponente preke @Output dekoratora -->
@@ -17,6 +17,33 @@
 
 
 <!-- #POST LIST KRAJ -->
+
+<!-- #### CARD COMPONENT POCETAK ######### -->
+
+<!-- preko ng-contenta mozemo da prosledimo HTML blok neodredjene velicine u CHILD komponent koji ce biti prikazan kao HTML kod CHILD komponenta -->
+<app-card>
+    <div>
+        <h2>Username: Nemanja Katic</h2>
+        <p>Occupation: programming</p>
+        <p>Sim rally racin', playin' guitar</p>
+    </div>
+
+    <span header>Random header</span>
+    <span body>Random tekst za body</span>
+    <span footer>Random footer</span>
+
+</app-card>
+
+<!-- #### CARD COMPONENT KRAJ ######### -->
+
+<!-- LIFE CYCLE HOOKS - POCETAK -->
+<div class="main">
+    <app-life-cycle-hooks></app-life-cycle-hooks>
+</div>
+
+
+<!-- LIFE CYCLE HOOKS - KRAJ -->
+
 
 <!-- OVDE SAM UBACIO DIREKTIVE DA BI BILE VIDLJIVIJE -->
 <app-directives></app-directives>
@@ -37,9 +64,9 @@
 
 <!-- class binding  se radi na nacin da se upise klasa i ".<ime css klase>", kada varijabla "isActive postane true, klasa se aktivira na elementu" -->
 
-<br/>
+<br />
 <button [class.active]="isActive" [class.no-active]="!isActive">Klikni me picko</button>
-<br/>
+<br />
 <!--  kod ispod [class.apple]="fruit=='Apple'" proverava da li varijabla fruit ima vrednost Apple i ako je taj uslov true, dodeljuje elementu klasu .apple -->
 <button [class.apple]="fruit=='Apple'">Fruit ninja</button>
 
@@ -48,7 +75,8 @@
 <!-- style binding - funkcionise na isti nacin kao i class binding, samo sto je keyword style, upise se [style.<ime css pravila>]=<vrednost> -->
 
 <!-- CSS pravilo background-color se u Angularu navodi kao backgroundColor, celu dokumentaciju o nazivima svojstava mozemo videti trazeci DOM STYLE PROPERTIES  -->
-<button [class.dimenzije]=true [style.backgroundColor]="isActive?'red':'green'">Crveno dugme ako je isActive true, zeleno za false</button>
+<button [class.dimenzije]=true [style.backgroundColor]="isActive?'red':'green'">Crveno dugme ako je isActive true,
+    zeleno za false</button>
 
 <!-- [class]='<ime varijable definisane u TS fajlu komponente>' - na ovaj nacin je moguce jednom elementu dodati vise klasa bez uslovne boolean varijable
     CSS stil se u varijabli navodi kao najobicniji string koji oznacava klasu u CSS fajlu, bez tacke 
@@ -60,7 +88,7 @@
 <!-- eventi se u angularu oznacavaju u zagradi, izabere se zeljeni event i u EXPORT CLASS delu TS fajla komponente se definise funkcija koji se poziva kada se dogadjaj ispali
     FUNKCIJU eventu dodeljujemo znakom jednakosti i pisemo je pod navodnicima
     PRIMER: (click)="btnClick()   -->
-<br/>
+<br />
 <button [class]="izTsFajlaStil" (click)="btnClick()">Klikni me za promenu stanja isActive varijable</button>
 
 <!-- prilikom ispaljivanja dogadjaja, uvek se pojavljuje $event objekat koji mozemo da prosledimo funkciji
@@ -73,7 +101,7 @@
 
 <input [id]="id" type="text" (keyup.Control)="keyPressCtrl($event)">
 
-<br/>
+<br />
 
 <!-- template variable je varijabla preko koje mozemo da pristupimo svojstvima kontrole, definise se kao #<ime varijable>
 PRIMER: #user - definisana varijabla, dogadjaju keyup.Enter - (dogadjaj koji obradjuje kada se pritisne enter na tastaturi) se prosledjuje user varijabla
@@ -81,24 +109,23 @@ user varijabla se u TS fajlu definise kao TYPE HtmlInputElement, preko cega moze
 
 *** Preko template varijable je moguce menjati sva svojstva bez "hvatanja" kontrole iz DOM-a klasicnim putem querySelector(), 
     nego <ime template varijable>.value = 'nova vrednost' ce postaviti novu vrednost u toj kontroli -->
-<input type="text"  id="userInput" class="klasaNekaTamo" (keyup.Enter)="keyPressEnter(user)" #user >
+<input type="text" id="userInput" class="klasaNekaTamo" (keyup.Enter)="keyPressEnter(user)" #user>
 
 
-<br/>
+<br />
 
 <!-- two directional data binding - dvosmerno bindovanje podataka tezi nacin
      iz TS fajla prvo uvezemo varijablu userName preko property bindinga, preko template stringa pristupimo kontroli iz koje preuzmemo value (u TS fajlu)
      i na kraju editujemo varijablu userName novom vrednoscu
 -->
 
-<input type="text" class="mt-15 dimenzije" #userNameControl (keyup.Enter)="changeUserName(userNameControl)" [value]="userName" id="twoDirectionDataBinding">
-<br/>
+<input type="text" class="mt-15 dimenzije" #userNameControl (keyup.Enter)="changeUserName(userNameControl)"
+    [value]="userName" id="twoDirectionDataBinding">
+<br />
 <!-- two directional data binding - dvosmerno bindovanje podataka - laksi nacin 
      [(ngModel)]="userName" - ngModel da bi bio koriscen, u TS fajlu moramo da importujemo "import { FormsModule } from '@angular/forms'",
      zatim joj se prosledjuje varijabla sa kojom zelimo da ostvarimo dvosmerni update i ngModel to radi sam za nas
 -->
-<input class="mt-15 dimenzije" type="text" [(ngModel)]="userName" >
+<input class="mt-15 dimenzije" type="text" [(ngModel)]="userName">
 
 <h4>{{userName}}</h4>
-
-

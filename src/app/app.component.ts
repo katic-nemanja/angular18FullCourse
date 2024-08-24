@@ -5,11 +5,13 @@ import { HeaderComponent } from "./header/header.component";
 import { FormsModule } from '@angular/forms';
 import { DirectivesComponent } from "./directives/directives.component";
 import { PostsListComponent } from "./posts-list/posts-list.component";
+import { CardComponent } from "./card/card.component";
+import { LifeCycleHooksComponent } from "./life-cycle-hooks/life-cycle-hooks.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AppNavbar, HeaderComponent, FormsModule, DirectivesComponent, PostsListComponent],
+  imports: [RouterOutlet, AppNavbar, HeaderComponent, FormsModule, DirectivesComponent, PostsListComponent, CardComponent, LifeCycleHooksComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
