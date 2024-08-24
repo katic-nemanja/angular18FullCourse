@@ -1,12 +1,22 @@
 <app-header></app-header>
 <app-navbar></app-navbar>
+
+<!-- ####POST LIST POCETAK -->
 <h2>{{appPostListTitle}} (App Component)</h2>
 <!-- [postListTitle]="appPostListTitle" [postListIsLogin]="appIsLogin" - ovo je nacin da se iz PARENT component
  posalje varijabla u CHILD component
  u uglastim zagradama se navodi ime varijable definisane u CHILD componentu, a iza znaka "=", pod navodnicima,
  se navodi ime varijable ili vrednost koju zelimo da prosledimo u CHILD component
  OVDE SMO VIDELI PRIMER PROSLEDJIVANJA DVE VARIJABLE IZ PARENTA U CHILD -->
-<app-posts-list [postListTitle]="appPostListTitle" [postListIsLogin]="appIsLogin"></app-posts-list>
+ <!-- (porukaEvent)="primiPoruku($event)" ovo je event definisan u child komponenti preko koje primamo podatke unutar ove PARENT komponente -->
+<app-posts-list (porukaEvent)="primiPoruku($event)" [postListTitle]="appPostListTitle" [postListIsLogin]="appIsLogin"></app-posts-list>
+<!-- ovo je primer preuzimanja podataka iz CHILD komponente preko @ViewChild -->
+<p>{{preuzetaPorukaIzChilda}} - &#64;ViewChild</p>
+<!-- ovo je primer preuzimanja podataka iz CHILD komponente preke @Output dekoratora -->
+<p>{{porukaIzChildaPrekoOutputa}}</p>
+
+
+<!-- #POST LIST KRAJ -->
 
 <!-- OVDE SAM UBACIO DIREKTIVE DA BI BILE VIDLJIVIJE -->
 <app-directives></app-directives>
