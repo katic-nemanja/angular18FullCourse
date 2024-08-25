@@ -7,11 +7,12 @@ import { DirectivesComponent } from "./directives/directives.component";
 import { PostsListComponent } from "./posts-list/posts-list.component";
 import { CardComponent } from "./card/card.component";
 import { LifeCycleHooksComponent } from "./life-cycle-hooks/life-cycle-hooks.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AppNavbar, HeaderComponent, FormsModule, DirectivesComponent, PostsListComponent, CardComponent, LifeCycleHooksComponent],
+  imports: [RouterOutlet, AppNavbar, HeaderComponent, FormsModule, DirectivesComponent, PostsListComponent, CardComponent, LifeCycleHooksComponent, ProfileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -92,6 +93,12 @@ changeUserName(kontrola:HTMLInputElement){
   this.userName = kontrola.value;
   console.log(`Posle promene > ${this.userName}`);
   
+}
+
+// kada se pozove ova funkcija iz Parent componenta app.component, u Profile.componentu se ispali dogadjaj OnChanges koji detektuje da se promena dogodila
+promeniUserName(){
+  let newUserName:any = document.querySelector("#inptOnChange");
+  this.userName = newUserName.value;
 }
 
 }

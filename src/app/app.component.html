@@ -39,7 +39,12 @@
 <!-- LIFE CYCLE HOOKS - POCETAK -->
 <div class="main">
     <app-life-cycle-hooks></app-life-cycle-hooks>
+    <app-profile [profileUserName]="userName"></app-profile>
+    <!-- ovde se obradjuje OnChanges LIFE CYCLE HOOK -->
+    <input type="text" id="inptOnChange">
+    <button (click)="promeniUserName()">Promeni User Name</button>
 </div>
+
 
 
 <!-- LIFE CYCLE HOOKS - KRAJ -->
